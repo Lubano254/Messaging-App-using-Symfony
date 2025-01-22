@@ -1,0 +1,31 @@
+
+{%extends "base.html.twig"%}
+
+{%block title%} Message {%endblock%}
+
+
+{% block body%}
+
+<main class="d-grid gap-3 justify-content-center w-100 bg-secondary rounded-3 text-light p-3">
+
+        <div class="d-flex flex-column gap-2 text-center w-100">
+            <h2>
+                {{ message.title }}
+            </h2>
+            <p class="message-text" data-message="{{ message.message }}">
+                {{ message.message }}
+            </p>
+        </div>
+
+
+<div class="d-flex gap-3 justify-content-center">
+    <a href="{{path("message_index")}}" class="btn btn-primary">Back to messages list</a>
+    <a href="{{path("delete_message", {"id": message.id})}}" class="btn btn-primary">Delete Message</a>
+</div>
+
+</main> 
+
+{%endblock%}
+
+
+

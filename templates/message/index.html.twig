@@ -1,0 +1,76 @@
+
+{%extends "base.html.twig"%}
+
+{%block title%} Messages {%endblock%}
+{%block stylesheets%}
+<style>
+    .message__item:hover {
+        background-color: #f8f9fa;
+        color: #333;
+        transform: scale(1.02); 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block body%}
+
+<main class="d-flex flex-column gap-5">
+
+<div>
+<h2>Adding new message</h2>
+
+{{form(form, {"attr": {"novalidate": "novalidate"}})}}
+
+</div>
+
+<div>
+<h2>Messages List</h2>
+
+{% if messages|length > 0 %}
+        <div class="d-flex flex-column gap-2" style="height: 40dvh; overflow-y: auto; overflow-x: hidden"
+>
+    {% for message in messages %}
+            <a href="{{ path("message_details", {"id": message.id}) }}"  class="bg-light message__item text-secondary p-3 rounded-3 text-decoration-none">
+                <strong>
+                    {{ message.title }}:
+                </strong>
+                <span class="message-text" data-message="{{ message.message }}">
+                    {{ message.message }}
+                </span>
+            </a>
+    {% endfor %}
+        </div>
+{% else %}
+    <div>
+        <p class="text-secondary">No messages to display.</p>
+    </div>
+{% endif %}
+
+</div>
+
+</main> 
+
+{%endblock%}
+
+
+{%block javascripts%}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messageElements = document.querySelectorAll('.message-text');
+        
+        messageElements.forEach(function(element) {
+            const fullMessage = element.getAttribute('data-message');
+            const maxLength = 100;
+            
+            if (fullMessage.length > maxLength) {
+                let preview = fullMessage.slice(0, maxLength);
+                const lastSpaceIndex = preview.lastIndexOf(' ');
+                preview = preview.slice(0, lastSpaceIndex) + '...';
+                element.textContent = preview;
+            }
+        });
+    });
+</script>
+{%endblock%}
