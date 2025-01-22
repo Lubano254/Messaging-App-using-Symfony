@@ -4,14 +4,14 @@
 
 {%block body%}
 <main class="d-flex justify-content-center flex-column text-center align-middle h-100 bg-secondary p-3 rounded-3 text-light">
-    <h2>Delete Message</h2>
+    <h2>Delete</h2>
 
     <p>Are you sure you want to delete the message with the title "{{ message.title }}"?</p>
 
 
     <form method="post">
         <div class="d-flex flex-row justify-content-center gap-3">
-            <a href="{{ path("message_details", {"id": id}) }}" class="btn btn-primary">No, Cancel</a>
+            <a href="{{ path("message", {"id": id}) }}" class="btn btn-primary">No, Cancel</a>
             <button type="submit" class="btn btn-danger">Delete</button>
         </div>
     </form>

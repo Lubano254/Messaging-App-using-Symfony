@@ -1,61 +1,60 @@
+{% extends "base.html.twig" %}
 
-{%extends "base.html.twig"%}
+{% block title %}Messages{% endblock %}
 
-{%block title%} Messages {%endblock%}
-{%block stylesheets%}
-<style>
-    .message__item:hover {
-        background-color: #f8f9fa;
-        color: #333;
-        transform: scale(1.02); 
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-        transition: all 0.3s ease;
-    }
-</style>
+{% block stylesheets %}
+    <style>
+        .message__item:hover {
+            background-color: rgb(10, 123, 236);
+            color: #333;
+            transform: scale(1.02); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            transition: all 0.3s ease;
+        }
+    </style>
 {% endblock %}
 
-{% block body%}
+{% block body %}
+    <main class="d-flex flex-column gap-5">
 
-<main class="d-flex flex-column gap-5">
+        <div>
+            <h2>Adding new message</h2>
 
-<div>
-<h2>Adding new message</h2>
-
-{{form(form, {"attr": {"novalidate": "novalidate"}})}}
-
-</div>
-
-<div>
-<h2>Messages List</h2>
-
-{% if messages|length > 0 %}
-        <div class="d-flex flex-column gap-2" style="height: 40dvh; overflow-y: auto; overflow-x: hidden"
->
-    {% for message in messages %}
-            <a href="{{ path("message_details", {"id": message.id}) }}"  class="bg-light message__item text-secondary p-3 rounded-3 text-decoration-none">
-                <strong>
-                    {{ message.title }}:
-                </strong>
-                <span class="message-text" data-message="{{ message.message }}">
-                    {{ message.message }}
-                </span>
-            </a>
-    {% endfor %}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            
+            <!-- Render the form fields with error handling -->
+            {{ form_row(form.title) }}
+            {{ form_row(form.message) }}
+            
+            <!-- Submit Button -->
+            {{ form_row(form.submit) }}
+            
+            {{ form_end(form) }}
         </div>
-{% else %}
-    <div>
-        <p class="text-secondary">No messages to display.</p>
-    </div>
-{% endif %}
 
-</div>
+        <div>
+            <h2>Messages List</h2>
 
-</main> 
+            {% if messages|length > 0 %}
+                <div class="d-flex flex-column gap-2" style="height: 40dvh; overflow-y: auto; overflow-x: hidden">
+                    {% for message in messages %}
+                        <a href="{{ path("message_details", {"id": message.id}) }}"  class="bg-light message__item text-secondary p-3 rounded-3 text-decoration-none">
+                            <strong>{{ message.title }}:</strong>
+                            <span class="message-text" data-message="{{ message.message }}">{{ message.message }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div>
+                    <p class="text-secondary">No messages to display.</p>
+                </div>
+            {% endif %}
+        </div>
 
-{%endblock%}
+    </main> 
+{% endblock %}
 
-
-{%block javascripts%}
+{% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const messageElements = document.querySelectorAll('.message-text');
@@ -73,4 +72,4 @@
         });
     });
 </script>
-{%endblock%}
+{% endblock %}

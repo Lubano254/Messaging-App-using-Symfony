@@ -4,55 +4,56 @@ namespace App\Entity;
 
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $Title = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Title cannot be blank.')]
+    private ?string $title = null;
 
-    #[ORM\Column(length: 500)]
-    #[Assert\NotBlank]
-    private ?string $Message = null;
+    #[ORM\Column(type: 'text')] // Use "text" for longer messages
+    #[Assert\NotBlank(message: 'Message cannot be blank.')]
+    private ?string $message = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setID(int $ID): static
+    public function setId(int $id): static
     {
-        $this->ID = $ID;
+        $this->id = $id;
 
         return $this;
     }
 
     public function getTitle(): ?string
     {
-        return $this->Title;
+        return $this->title;
     }
 
-    public function setTitle(string $Title): static
+    public function setTitle(string $title): static
     {
-        $this->Title = $Title;
+        $this->title = $title;
 
         return $this;
     }
 
     public function getMessage(): ?string
     {
-        return $this->Message;
+        return $this->message;
     }
 
-    public function setMessage(string $Message): static
+    public function setMessage(string $message): static
     {
-        $this->Message = $Message;
+        $this->message = $message;
 
         return $this;
     }
