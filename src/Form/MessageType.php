@@ -46,7 +46,7 @@ class MessageType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Send Message',
-                'attr' => ['class' => 'btn btn-primary', 'padding-top-2px'], // Bootstrap class for styling the button
+                'attr' => ['class' => 'btn btn-success'], // Bootstrap class for styling the button
             ]);
     }
 

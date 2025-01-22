@@ -7,8 +7,8 @@
         .message__item:hover {
             background-color: rgb(10, 123, 236);
             color: #333;
-            transform: scale(1.02); 
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            transform: scale(1); 
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1); 
             transition: all 0.3s ease;
         }
     </style>
@@ -36,7 +36,7 @@
             <h2>Messages List</h2>
 
             {% if messages|length > 0 %}
-                <div class="d-flex flex-column gap-2" style="height: 40dvh; overflow-y: auto; overflow-x: hidden">
+                <div class="d-flex flex-column gap-3" style="height: 30dvh; overflow-y: auto; overflow-x: hidden">
                     {% for message in messages %}
                         <a href="{{ path("message_details", {"id": message.id}) }}"  class="bg-light message__item text-secondary p-3 rounded-3 text-decoration-none">
                             <strong>{{ message.title }}:</strong>
