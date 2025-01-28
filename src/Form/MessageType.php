@@ -15,15 +15,15 @@ class MessageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // Add form fields for the Message entity
+        // form fields for the Message entity
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Title',
                 'attr' => [
-                    'class' => 'form-control',  // Bootstrap class for styling
+                    'class' => 'form-control',
                     'placeholder' => 'Enter title',
                 ],
-                'label_attr' => ['class' => 'form-label'], // Adding Bootstrap class to the label
+                'label_attr' => ['class' => 'form-label'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Title is required.',
@@ -33,11 +33,11 @@ class MessageType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
                 'attr' => [
-                    'class' => 'form-control',  // Bootstrap class for styling
+                    'class' => 'form-control',
                     'placeholder' => 'Enter message',
-                    'rows' => 5,  // Optional: Set number of rows for textarea
+                    'rows' => 5,
                 ],
-                'label_attr' => ['class' => 'form-label'], // Adding Bootstrap class to the label
+                'label_attr' => ['class' => 'form-label'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Message content is required.',
@@ -46,13 +46,13 @@ class MessageType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Send Message',
-                'attr' => ['class' => 'btn btn-success'], // Bootstrap class for styling the button
+                'attr' => ['class' => 'btn btn-success'],
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        // Associate this form with the Message entity
+
         $resolver->setDefaults([
             'data_class' => Message::class,
         ]);

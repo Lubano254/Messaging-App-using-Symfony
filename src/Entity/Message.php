@@ -18,7 +18,7 @@ class Message
     #[Assert\NotBlank(message: 'Title cannot be blank.')]
     private ?string $title = null;
 
-    #[ORM\Column(type: 'text')] // Use "text" for longer messages
+    #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'Message cannot be blank.')]
     private ?string $message = null;
 
